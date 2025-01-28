@@ -5,10 +5,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class FTPServer {
-    private static final String welcomeMessage = "220 Welcome to FTP server";
-    private static int port = 1996;
-
-    public static void start() throws IOException {
+    public static void start(int port) throws IOException {
         ServerSocket server = new ServerSocket(port);
 
         while (true) {

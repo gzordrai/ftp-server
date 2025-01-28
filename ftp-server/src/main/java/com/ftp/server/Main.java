@@ -10,6 +10,11 @@ import com.ftp.server.ftp.FTPServer;
  */
 public class Main {
     public static void main(String[] args) throws IOException {
-        FTPServer.start();
+        if (args.length != 1) {
+            System.out.println("Usage: java -jar ftp-server.jar <port>");
+            System.exit(1);
+        }
+
+        FTPServer.start(Integer.parseInt(args[0]));
     }
 }
