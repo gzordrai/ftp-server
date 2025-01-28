@@ -26,4 +26,9 @@ public class FTPStream {
     public void write(String message) {
         this.writer.println(message);
     }
+
+    public void close() throws IOException{
+        this.reader.close();
+        this.writer.close();
+    }
 }
