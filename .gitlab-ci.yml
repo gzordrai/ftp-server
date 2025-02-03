@@ -1,18 +1,9 @@
 stages:
   - build
-  - test
 
-cache:
-  paths:
-    - .m2/repository/
-    - target/
-
-build:
+rust-latest:
   stage: build
+  image: maven:latest
   script:
-    - mvn compile
-
-test:
-  stage: test
-  script:
-    - mvn test
+    - mvn compile --verbose
+    - mvn test --verbose
