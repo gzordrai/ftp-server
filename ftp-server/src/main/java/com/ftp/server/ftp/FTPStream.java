@@ -7,10 +7,12 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 public class FTPStream {
+    private Socket socket;
     private BufferedReader reader;
     private PrintWriter writer;
 
     public FTPStream(Socket socket) throws IOException {
+        this.socket = socket;
         this.reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         this.writer = new PrintWriter(socket.getOutputStream(), true);
     }
@@ -30,5 +32,9 @@ public class FTPStream {
     public void close() throws IOException{
         this.reader.close();
         this.writer.close();
+    }
+
+    public Socket getSocket() {
+        return this.socket;
     }
 }
