@@ -1,9 +1,9 @@
 stages:
   - build
 
-rust-latest:
+mpaven-latest:
   stage: build
   image: maven:latest
   script:
-    - mvn compile --verbose
-    - mvn test --verbose
+    - mvn compile
+    - mvn test
