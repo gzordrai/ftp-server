@@ -7,7 +7,9 @@ public enum FTPResponseCode {
     LOGIN_WITH_USER_PASS("530 Please login with USER and PASS."),
     CURRENT_DIRECTORY("257 \"%s\" is the current directory."),
     SWITCHING_TO_BINARY("200 Switching to Binary mode."),
-    ENTERING_PASSIVE_MODE("227 Entering Passive Mode (%s)");
+    ENTERING_PASSIVE_MODE("227 Entering Passive Mode (%s)"),
+    TRANSFER_START("150 Here comes the directory listing."),
+    DIRECTORY_SENDED("226 Directory send OK"),;
 
     private final String message;
 
