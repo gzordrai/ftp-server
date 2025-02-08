@@ -4,12 +4,17 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.ftp.server.ftp.FTPServer;
 
 public class Main {
+    private static final Logger logger = LogManager.getLogger(Main.class);
+
     public static void main(String[] args) throws IOException {
         if (args.length != 2) {
-            System.out.println("Usage: java -jar ftp-server.jar <port> <volume>");
+            logger.error("Usage: java -jar ftp-server.jar <port> <volume>");
             System.exit(1);
         }
 
@@ -17,7 +22,7 @@ public class Main {
         String rootPath = args[1];
 
         if (!Files.exists(Paths.get(rootPath))) {
-            System.out.println("Error: The specified volume path does not exist.");
+            logger.error("Error: The specified volume path does not exist.");
             System.exit(1);
         }
 
