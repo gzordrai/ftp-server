@@ -9,7 +9,9 @@ public enum FTPResponseCode {
     SWITCHING_TO_BINARY("200 Switching to Binary mode."),
     ENTERING_PASSIVE_MODE("227 Entering Passive Mode (%s)"),
     TRANSFER_START("150 Here comes the directory listing."),
-    DIRECTORY_SENDED("226 Directory send OK"),;
+    DIRECTORY_SENDED("226 Directory send OK"),
+    SYNTAX_ERROR("501 Syntax error in parameters or arguments."),
+    ENTERING_EXTENDED_PASSIVE_MODE("229 Entering Extended Passive Mode (|||%d|)"),;
 
     private final String message;
 

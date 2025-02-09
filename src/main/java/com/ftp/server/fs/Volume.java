@@ -38,6 +38,23 @@ public class Volume {
         }
     }
 
+    public boolean changeDirectory(String path) {
+        lock.writeLock().lock();
+
+        try {
+            File dir = new File(rootDirectory, path);
+
+            if (!dir.exists() || !dir.isDirectory())
+                throw new IllegalArgumentException("Invalid directory: " + path);
+
+            return true;
+        } catch (IllegalArgumentException e) {
+            return false;
+        } finally {
+            lock.writeLock().unlock();
+        }
+    }
+
     public boolean deleteFile(String path) {
         lock.writeLock().lock();
 
