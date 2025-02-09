@@ -10,11 +10,9 @@ import java.net.Socket;
 
 public class EpsvCommand implements Command {
     private final FTPClient client;
-    private final String[] args;
 
-    public EpsvCommand(FTPClient client, String[] args) {
+    public EpsvCommand(FTPClient client) {
         this.client = client;
-        this.args = args;
     }
 
     @Override

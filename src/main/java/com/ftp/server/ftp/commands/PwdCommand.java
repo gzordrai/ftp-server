@@ -6,7 +6,7 @@ import com.ftp.server.ftp.FTPResponseCode;
 public class PwdCommand implements Command {
     private final FTPClient client;
 
-    public PwdCommand(FTPClient client, String[] args) {
+    public PwdCommand(FTPClient client) {
         this.client = client;
     }
 

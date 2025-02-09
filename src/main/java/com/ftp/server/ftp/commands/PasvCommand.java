@@ -11,7 +11,7 @@ import java.net.Socket;
 public class PasvCommand implements Command {
     private final FTPClient client;
 
-    public PasvCommand(FTPClient client, String[] args) {
+    public PasvCommand(FTPClient client) {
         this.client = client;
     }
 

@@ -5,7 +5,7 @@ import com.ftp.server.ftp.FTPClient;
 public class SystCommand implements Command {
     private final FTPClient client;
 
-    public SystCommand(FTPClient client, String[] args) {
+    public SystCommand(FTPClient client) {
         this.client = client;
     }
 

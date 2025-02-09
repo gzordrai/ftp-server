@@ -30,9 +30,14 @@ public class FTPCommandFactory {
     public static Command getHandler(String command, FTPClient client, String[] args) {
         Class<? extends Command> handlerClass = commandHandlers.get(command.toUpperCase());
 
+        System.out.println(command + args.length);
+
         if (handlerClass != null) {
             try {
-                return handlerClass.getDeclaredConstructor(FTPClient.class, String[].class).newInstance(client, args);
+                if (args.length > 1)
+                    return handlerClass.getDeclaredConstructor(FTPClient.class, String[].class).newInstance(client, args);
+                else
+                    return handlerClass.getDeclaredConstructor(FTPClient.class).newInstance(client);
             } catch (Exception e) {
                 e.printStackTrace();
             }

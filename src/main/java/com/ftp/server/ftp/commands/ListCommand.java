@@ -8,11 +8,9 @@ import java.io.IOException;
 
 public class ListCommand implements Command {
     private final FTPClient client;
-    private final String[] args;
 
-    public ListCommand(FTPClient client, String[] args) {
+    public ListCommand(FTPClient client) {
         this.client = client;
-        this.args = args;
     }
 
     @Override
