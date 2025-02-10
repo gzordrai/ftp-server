@@ -1,11 +1,10 @@
 package com.ftp.server.ftp;
 
 public enum FTPResponseCode {
+    /* Success Responses */
     WELCOME("220 Welcome to FTP server"),
     LOGIN_SUCCESSFUL("230 Login successful."),
     SPECIFY_PASSWORD("331 Please specify the password."),
-    LOGIN_WITH_USER_PASS("530 Please login with USER and PASS."),
-    NOT_LOGGED_IN("530 Not logged in."),
     SYSTEM_TYPE("215 %s"),
     FEATURES_SUPPORTED("211-Features:\n%s\n211 End"),
     CURRENT_DIRECTORY("257 \"%s\" is the current directory."),
@@ -14,10 +13,19 @@ public enum FTPResponseCode {
     ENTERING_PASSIVE_MODE("227 Entering Passive Mode (%s)"),
     TRANSFER_START("150 Here comes the directory listing."),
     DIRECTORY_SENDED("226 Directory send OK"),
-    SYNTAX_ERROR("501 Syntax error in parameters or arguments."),
     ENTERING_EXTENDED_PASSIVE_MODE("229 Entering Extended Passive Mode (|||%d|)"),
+    GOODBYE("221 Goodbye."),
+    FILE_EXISTS_READY_FOR_DESTINATION("350 File exists, ready for destination name."),
+    FILE_RENAMED_SUCCESSFULLY("250 File renamed successfully."),
+
+    /* Error Responses */
+    SYNTAX_ERROR("501 Syntax error in parameters or arguments."),
+    LOGIN_WITH_USER_PASS("530 Please login with USER and PASS."),
+    NOT_LOGGED_IN("530 Not logged in."),
+    FILE_NOT_FOUND("550 File not found."),
     FAILED_TO_CHANGE_DIRECTORY("550 Failed to change directory."),
-    GOODBYE("221 Goodbye.");
+    FAILED_TO_RENAME_FILE("550 Failed to rename file."),
+    BAD_SEQUENCE_OF_COMMANDS("503 Bad sequence of commands.");
 
     private final String message;
 

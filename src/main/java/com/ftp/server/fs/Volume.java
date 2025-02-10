@@ -110,8 +110,8 @@ public class Volume {
         lock.writeLock().lock();
 
         try {
-            File oldFile = new File(rootDirectory, oldPath);
-            File newFile = new File(rootDirectory, newPath);
+            File oldFile = new File(oldPath);
+            File newFile = new File(newPath);
 
             return oldFile.renameTo(newFile);
         } finally {

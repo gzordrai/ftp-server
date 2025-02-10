@@ -3,6 +3,7 @@ package com.ftp.server.ftp;
 import com.ftp.server.fs.Volume;
 import com.ftp.server.ftp.commands.Command;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -14,10 +15,12 @@ public class FTPClient implements Runnable {
     private FTPStream dataStream;
     private ServerSocket dataServerSocket;
     private CountDownLatch dataConnectionLatch;
+    private String fileToRenamePath;
 
     public FTPClient(Socket socket) throws IOException {
         this.commandStream = new FTPStream(socket);
         this.dataConnectionLatch = new CountDownLatch(1);
+        this.fileToRenamePath = null;
     }
 
     public FTPStream getCommandStream() {
@@ -34,6 +37,14 @@ public class FTPClient implements Runnable {
 
     public void setDataStream(FTPStream dataStream) {
         this.dataStream = dataStream;
+    }
+
+    public void setRenameFromFilePath(String file) {
+        this.fileToRenamePath = file;
+    }
+
+    public String getRenameFromFilePath() {
+        return this.fileToRenamePath;
     }
 
     public ServerSocket getDataServerSocket() {
