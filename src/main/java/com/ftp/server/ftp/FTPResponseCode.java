@@ -19,6 +19,7 @@ public enum FTPResponseCode {
     FILE_RENAMED_SUCCESSFULLY("250 File renamed successfully."),
     FILE_DELETED_SUCCESSFULLY("250 File deleted successfully."),
     DIRECTORY_CREATED("257 Directory created."),
+    FILE_SIZE("213 %d"),
 
     /* Error Responses */
     SYNTAX_ERROR("501 Syntax error in parameters or arguments."),
