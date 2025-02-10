@@ -3,9 +3,6 @@ package com.ftp.server.ftp.commands;
 import com.ftp.server.ftp.FTPClient;
 import com.ftp.server.ftp.FTPResponseCode;
 
-import java.io.File;
-import java.nio.file.Files;
-
 /**
  * This class implements the DELE (Delete) command.
  * It deletes a file on the server.
