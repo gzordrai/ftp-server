@@ -6,11 +6,15 @@ import java.nio.file.Files;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class Volume {
     private final String rootPath;
     private final File rootDirectory;
     private File currentDirectory;
     private final ReadWriteLock lock = new ReentrantReadWriteLock();
+    private static final Logger logger = LogManager.getLogger(Volume.class);
 
     public Volume(String rootPath) {
         this.rootPath = rootPath;
@@ -92,13 +96,19 @@ public class Volume {
     public boolean deleteFile(String path) {
         lock.writeLock().lock();
 
+        logger.info("Deleting file: {}{}", this.currentDirectory, path);
+
         try {
-            File file = new File(rootDirectory, path);
+            File file = new File(this.currentDirectory, path);
 
             try {
                 Files.delete(file.toPath());
+                logger.info("File deleted successfully: {} in {}", path, this.currentDirectory);
+
                 return true;
             } catch (IOException e) {
+                logger.error("Failed to delete file: {} in {}", path, this.currentDirectory);
+
                 return false;
             }
         } finally {
