@@ -24,11 +24,11 @@ public class CwdCommand implements Command {
 
             String newPath = joiner.toString();
 
-            if (client.getVolume().changeDirectory(newPath))
-                client.sendResponse(FTPResponseCode.CURRENT_DIRECTORY.getMessage(newPath));
+            if (this.client.getVolume().changeDirectory(newPath))
+                this.client.sendResponse(FTPResponseCode.CURRENT_DIRECTORY.getMessage(newPath));
             else
-                client.sendResponse("550 Failed to change directory.");
+                this.client.sendResponse(FTPResponseCode.FAILED_TO_CHANGE_DIRECTORY.toString());
         } else
-            client.sendResponse(FTPResponseCode.SYNTAX_ERROR.toString());
+            this.client.sendResponse(FTPResponseCode.SYNTAX_ERROR.toString());
     }
 }
