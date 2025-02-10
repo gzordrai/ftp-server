@@ -8,29 +8,42 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+/**
+ * This class implements the EPSV (Extended Passive Mode) command.
+ * It sets the server to extended passive mode and waits for a data connection from the client.
+ */
 public class EpsvCommand implements Command {
     private final FTPClient client;
 
+    /**
+     * Constructs a new EpsvCommand.
+     *
+     * @param client the FTP client
+     */
     public EpsvCommand(FTPClient client) {
         this.client = client;
     }
 
+    /**
+     * Executes the EPSV command.
+     * Sets the server to extended passive mode and waits for a data connection from the client.
+     */
     @Override
     public void execute() {
         try {
-            if (client.getDataServerSocket() != null && !client.getDataServerSocket().isClosed())
-                client.getDataServerSocket().close();
+            if (this.client.getDataServerSocket() != null && !this.client.getDataServerSocket().isClosed())
+                this.client.getDataServerSocket().close();
 
-            client.setDataServerSocket(new ServerSocket(0)); // Bind to any available port
+            this.client.setDataServerSocket(new ServerSocket(0)); // Bind to any available port
 
-            int port = client.getDataServerSocket().getLocalPort();
+            int port = this.client.getDataServerSocket().getLocalPort();
 
-            client.getCommandStream().write(FTPResponseCode.ENTERING_EXTENDED_PASSIVE_MODE.getMessage(port));
+            this.client.getCommandStream().write(FTPResponseCode.ENTERING_EXTENDED_PASSIVE_MODE.getMessage(port));
 
-            Socket dataSocket = client.getDataServerSocket().accept();
+            Socket dataSocket = this.client.getDataServerSocket().accept();
 
-            client.setDataStream(new FTPStream(dataSocket));
-            client.getDataConnectionLatch().countDown();
+            this.client.setDataStream(new FTPStream(dataSocket));
+            this.client.getDataConnectionLatch().countDown();
         } catch (IOException e) {
             e.printStackTrace();
         }
