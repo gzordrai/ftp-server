@@ -3,6 +3,8 @@ package com.ftp.server.fs;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
@@ -40,6 +42,30 @@ public class Volume {
 
     public File getCurrentDirectory() {
         return currentDirectory;
+    }
+
+    public long getFileSize(String path) {
+        File file = new File(rootDirectory, path);
+
+        if (file.exists() && file.isFile()) {
+            return file.length();
+        }
+
+        return -1;
+    }
+
+    public String getLastTimeModified(String path) {
+        File file = new File(rootDirectory, path);
+
+        if (file.exists() && file.isFile()) {
+            long lastModified = file.lastModified();
+            Date date = new Date(lastModified);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+
+            return dateFormat.format(date);
+        }
+
+        return null;
     }
 
     public boolean createDirectory(String path) {
