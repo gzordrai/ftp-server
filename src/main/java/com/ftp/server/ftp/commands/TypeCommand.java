@@ -3,15 +3,29 @@ package com.ftp.server.ftp.commands;
 import com.ftp.server.ftp.FTPClient;
 import com.ftp.server.ftp.FTPResponseCode;
 
+/**
+ * This class implements the TYPE command.
+ * It sets the transfer mode to either ASCII or binary.
+ */
 public class TypeCommand implements Command {
     private final FTPClient client;
     private final String[] args;
 
+    /**
+     * Constructs a new TypeCommand.
+     *
+     * @param client the FTP client
+     * @param args   the command arguments
+     */
     public TypeCommand(FTPClient client, String[] args) {
         this.client = client;
         this.args = args;
     }
 
+    /**
+     * Executes the TYPE command.
+     * Sets the transfer mode to either ASCII or binary.
+     */
     @Override
     public void execute() {
         if (args.length > 1) {
@@ -19,18 +33,18 @@ public class TypeCommand implements Command {
 
             switch (type) {
                 case "A":
-                    client.sendResponse("200 Switching to ASCII mode.");
+                    this.client.sendResponse(FTPResponseCode.SWITCHING_TO_ASCII.toString());
                     break;
 
                 case "I":
-                    client.sendResponse(FTPResponseCode.SWITCHING_TO_BINARY.toString());
+                    this.client.sendResponse(FTPResponseCode.SWITCHING_TO_BINARY.toString());
                     break;
 
                 default:
-                    client.sendResponse(FTPResponseCode.SYNTAX_ERROR.toString());
+                    this.client.sendResponse(FTPResponseCode.SYNTAX_ERROR.toString());
                     break;
             }
         } else
-            client.sendResponse(FTPResponseCode.SYNTAX_ERROR.toString());
+            this.client.sendResponse(FTPResponseCode.SYNTAX_ERROR.toString());
     }
 }
