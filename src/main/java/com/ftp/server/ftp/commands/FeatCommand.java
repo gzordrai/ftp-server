@@ -2,6 +2,7 @@ package com.ftp.server.ftp.commands;
 
 import com.ftp.server.ftp.FTPClient;
 import com.ftp.server.ftp.FTPCommandFactory;
+import com.ftp.server.ftp.FTPResponseCode;
 
 import java.util.Set;
 
@@ -27,12 +28,12 @@ public class FeatCommand implements Command {
      */
     @Override
     public void execute() {
-        StringBuilder response = new StringBuilder("211-Features:\n");
+        StringBuilder response = new StringBuilder();
         Set<String> commands = FTPCommandFactory.getCommandHandlers();
 
         for (String command : commands)
             response.append(" ").append(command).append("\n");
 
-        this.client.sendResponse(response.toString());
+        this.client.sendResponse(FTPResponseCode.FEATURES_SUPPORTED.getMessage(response.toString()));
     }
 }
