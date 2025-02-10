@@ -35,6 +35,7 @@ public class FTPCommandFactory {
         commandHandlers.put("LIST", ListCommand.class);
         commandHandlers.put("CWD", CwdCommand.class);
         commandHandlers.put("CDUP", CdupCommand.class);
+        commandHandlers.put("MKD", MkdCommand.class);
         // commandHandlers.put("RETR", RetrCommand.class);
         // commandHandlers.put("STOR", StorCommand.class);
         commandHandlers.put("DELE", DeleCommand.class);
