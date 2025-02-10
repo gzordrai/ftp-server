@@ -7,15 +7,23 @@ import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class Volume {
+    private final String rootPath;
     private final File rootDirectory;
+    private File currentDirectory;
     private final ReadWriteLock lock = new ReentrantReadWriteLock();
 
     public Volume(String rootPath) {
+        this.rootPath = rootPath;
         this.rootDirectory = new File(rootPath);
+        this.currentDirectory = rootDirectory;
 
         if (!rootDirectory.exists() || !rootDirectory.isDirectory()) {
             throw new IllegalArgumentException("Invalid root directory: " + rootPath);
         }
+    }
+
+    public String getRootPath() {
+        return rootPath;
     }
 
     public File getRootDirectory() {
@@ -24,6 +32,10 @@ public class Volume {
 
     public File getFile(String path) {
         return new File(rootDirectory, path);
+    }
+
+    public File getCurrentDirectory() {
+        return currentDirectory;
     }
 
     public boolean createDirectory(String path) {
@@ -47,9 +59,31 @@ public class Volume {
             if (!dir.exists() || !dir.isDirectory())
                 throw new IllegalArgumentException("Invalid directory: " + path);
 
+            this.currentDirectory = dir;
+
             return true;
         } catch (IllegalArgumentException e) {
             return false;
+        } finally {
+            lock.writeLock().unlock();
+        }
+    }
+
+    public boolean changeToParentDirectory() {
+        if (this.currentDirectory.equals(rootDirectory))
+            return false;
+
+        lock.writeLock().lock();
+
+        try {
+            File parent = currentDirectory.getParentFile();
+
+            if (parent == null || !parent.exists() || !parent.isDirectory())
+                return false;
+
+            this.currentDirectory = parent;
+
+            return true;
         } finally {
             lock.writeLock().unlock();
         }
@@ -86,6 +120,6 @@ public class Volume {
     }
 
     public File[] listFiles() {
-        return rootDirectory.listFiles();
+        return this.currentDirectory.listFiles();
     }
 }
