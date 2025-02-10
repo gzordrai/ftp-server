@@ -21,6 +21,8 @@ public class Main {
         int port = Integer.parseInt(args[0]);
         String rootPath = args[1];
 
+        logger.info("Starting FTP server on port {} with volume path {}", port, rootPath);
+
         if (!Files.exists(Paths.get(rootPath))) {
             logger.error("Error: The specified volume path does not exist.");
             System.exit(1);
