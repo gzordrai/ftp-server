@@ -56,6 +56,17 @@ public class FTPClient implements Runnable {
         this.dataStream.write(data);
     }
 
+    public void close() {
+        try {
+            this.commandStream.close();
+
+            if (this.dataStream != null)
+                this.dataStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void processCommand(String command) {
         String[] commandParts = command.split(" ");
         Command handler = FTPCommandFactory.getHandler(commandParts[0], this, commandParts);
