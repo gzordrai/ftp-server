@@ -11,7 +11,9 @@ public enum FTPResponseCode {
     TRANSFER_START("150 Here comes the directory listing."),
     DIRECTORY_SENDED("226 Directory send OK"),
     SYNTAX_ERROR("501 Syntax error in parameters or arguments."),
-    ENTERING_EXTENDED_PASSIVE_MODE("229 Entering Extended Passive Mode (|||%d|)"),;
+    ENTERING_EXTENDED_PASSIVE_MODE("229 Entering Extended Passive Mode (|||%d|)"),
+    FAILED_TO_CHANGE_DIRECTORY("550 Failed to change directory."),
+    GOODBYE("221 Goodbye.");
 
     private final String message;
 
