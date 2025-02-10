@@ -3,7 +3,6 @@ package com.ftp.server.ftp;
 import com.ftp.server.fs.Volume;
 import com.ftp.server.ftp.commands.Command;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
