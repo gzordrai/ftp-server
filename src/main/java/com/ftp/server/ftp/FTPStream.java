@@ -2,7 +2,9 @@ package com.ftp.server.ftp;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 
@@ -36,5 +38,13 @@ public class FTPStream {
 
     public Socket getSocket() {
         return this.socket;
+    }
+
+    public InputStream getInputStream() throws IOException {
+        return this.socket.getInputStream();
+    }
+
+    public OutputStream getOutputStream() throws IOException {
+        return this.socket.getOutputStream();
     }
 }
