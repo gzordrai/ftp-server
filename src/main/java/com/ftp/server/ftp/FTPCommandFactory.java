@@ -28,7 +28,7 @@ public class FTPCommandFactory {
         commandHandlers.put("EPSV", EpsvCommand.class);
         commandHandlers.put("LIST", ListCommand.class);
         commandHandlers.put("CWD", CwdCommand.class);
-        // commandHandlers.put("CDUP", CdupCommand.class);
+        commandHandlers.put("CDUP", CdupCommand.class);
         // commandHandlers.put("RETR", RetrCommand.class);
         // commandHandlers.put("STOR", StorCommand.class);
         commandHandlers.put("QUIT", QuitCommand.class);
