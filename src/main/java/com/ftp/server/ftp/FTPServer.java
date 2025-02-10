@@ -11,13 +11,27 @@ import org.apache.logging.log4j.Logger;
 
 import com.ftp.server.fs.Volume;
 
+/**
+ * This class represents an FTP server.
+ * It handles incoming client connections and manages the server volume.
+ */
 public class FTPServer {
     private static Volume volume;
     private static final Logger logger = LogManager.getLogger(FTPServer.class);
 
+    /**
+     * Private constructor to prevent instantiation.
+     */
     private FTPServer() {
     }
 
+    /**
+     * Starts the FTP server on the specified port and with the specified root path.
+     *
+     * @param port     the port to start the server on
+     * @param rootPath the root path of the server volume
+     * @throws IOException if an I/O error occurs
+     */
     public static void start(int port, String rootPath) throws IOException {
         volume = new Volume(rootPath);
 
@@ -39,6 +53,11 @@ public class FTPServer {
         }
     }
 
+    /**
+     * Returns the server volume.
+     *
+     * @return the server volume
+     */
     public static Volume getVolume() {
         return volume;
     }
