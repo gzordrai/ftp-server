@@ -21,6 +21,8 @@ public enum FTPResponseCode {
     DIRECTORY_CREATED("257 Directory created."),
     FILE_SIZE("213 %d"),
     FILE_LAST_MODIFIED("213 %s"),
+    OPENING_DATA_CONNECTION("150 Opening data connection."),
+    TRANSFER_COMPLETE("226 Transfer complete."),
 
     /* Error Responses */
     SYNTAX_ERROR("501 Syntax error in parameters or arguments."),
@@ -31,7 +33,8 @@ public enum FTPResponseCode {
     FAILED_TO_RENAME_FILE("550 Failed to rename file."),
     BAD_SEQUENCE_OF_COMMANDS("503 Bad sequence of commands."),
     FAILED_TO_DELETE_FILE("550 Failed to delete file."),
-    FAILED_TO_CREATE_DIRECTORY("550 Failed to create directory."),;
+    FAILED_TO_CREATE_DIRECTORY("550 Failed to create directory."),
+    REQUESTED_ACTION_ABORTED("451 Requested action not taken."),;
 
     private final String message;
 
