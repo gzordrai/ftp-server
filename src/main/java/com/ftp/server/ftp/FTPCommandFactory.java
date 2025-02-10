@@ -9,10 +9,16 @@ import java.util.Set;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * Factory class for creating FTP command handlers.
+ */
 public class FTPCommandFactory {
     private static final Map<String, Class<? extends Command>> commandHandlers = new HashMap<>();
     private static final Logger logger = LogManager.getLogger(FTPCommandFactory.class);
 
+    /**
+     * Private constructor to prevent instantiation.
+     */
     private FTPCommandFactory() {
     }
 
@@ -36,6 +42,14 @@ public class FTPCommandFactory {
         commandHandlers.put("QUIT", QuitCommand.class);
     }
 
+    /**
+     * Returns the command handler for the specified command.
+     *
+     * @param command the command name
+     * @param client the FTP client
+     * @param args the command arguments
+     * @return the command handler, or null if no handler is found
+     */
     public static Command getHandler(String command, FTPClient client, String[] args) {
         Class<? extends Command> handlerClass = commandHandlers.get(command.toUpperCase());
 
@@ -55,6 +69,11 @@ public class FTPCommandFactory {
         return null;
     }
 
+    /**
+     * Returns the set of all command handlers.
+     *
+     * @return the set of all command handlers
+     */
     public static Set<String> getCommandHandlers() {
         return commandHandlers.keySet();
     }
